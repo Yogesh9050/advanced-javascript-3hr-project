@@ -10,11 +10,16 @@ function handleFormSubmit(event) {
     price: parseFloat(event.target.price.value),
   };
 
+  if (!itemDetails.name || !itemDetails.description || isNaN(itemDetails.quantity) || isNaN(itemDetails.price)) {
+    alert("Please fill out all fields with valid values.");
+    return;
+}
+
   // POST data to the API
   axios
     .post(apiBaseUrl, itemDetails)
     .then((response) => displayItemOnScreen(response.data))
-    .catch((error) => console.error(error));
+    .catch((error) => alert(error));
 
   // Clear form fields
   event.target.reset();
@@ -49,6 +54,11 @@ function displayItemOnScreen(item) {
   editBtn.addEventListener("click", () => handleEditClick(item, listItem));
   listItem.appendChild(editBtn);
 
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.addEventListener("click", () => handleDeleteClick(item._id, listItem));
+  listItem.appendChild(deleteBtn);
+
   list.appendChild(listItem);
 }
 
@@ -61,6 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch((error) => console.error(error));
 });
+
+function handleDeleteClick(itemId, listItem) {
+  if (confirm("Are you sure you want to delete this item?")) {
+    axios
+      .delete(`${apiBaseUrl}/${itemId}`)
+      .then(() => {
+        listItem.remove();
+      })
+      .catch((error) => console.error(error));
+  }
+}
 
 // Handle Buy button click
 function handleBuyClick(itemId, quantityToBuy, listItem) {
