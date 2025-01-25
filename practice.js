@@ -1,3 +1,5 @@
+//this file is for practice 
+
 const apiBaseUrl = "https://crudcrud.com/api/da7803b954a146fcb7183153fa1f3ae1/inventory";
 
 function handleFormSubmit(event){
