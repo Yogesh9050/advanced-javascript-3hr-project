@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Inventory</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <form onsubmit="handleFormSubmit(event)">
+        <label for="name">Item name</label>
+        <input type="text" name="name" id="name" />
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" />
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" id="quantity">
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price">
+        <button type="submit">Submit</button>
+    </form>
+    <ul id="user-list">
+          
+    </ul>
+</body>
+<script src="index.js"></script>
+</html>
